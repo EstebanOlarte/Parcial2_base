@@ -16,6 +16,8 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private float autoDestroyTime = 5F;
 
+    public int bulletType;
+
     // Use this for initialization
     private void Start()
     {
@@ -30,6 +32,21 @@ public class Bullet : MonoBehaviour
     private void AutoDestroy()
     {
         Destroy(gameObject);
-        Destroy(gameObject);
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Hazard" && bulletType==2)
+        {
+            
+        }
+        else if(bulletType==1)
+        {
+            AutoDestroy();
+        }
+        else if (collision.gameObject.layer==8)
+        {
+            AutoDestroy();
+        }
+    }
+
 }

@@ -12,14 +12,25 @@ public class Hazard : MonoBehaviour
 
     private float spinTime = 1F;
 
+    public int hazardType;
+
     // Use this for initialization
     protected void Start()
     {
         myCollider = GetComponent<Collider2D>();
         myRigidbody = GetComponent<Rigidbody2D>();
+
     }
 
-    protected void OnCollisionEnter2D(Collision2D collision)
+    private void Update()
+    {
+        if (hazardType==1)
+        {
+            transform.eulerAngles += new Vector3(0, 0, 1);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<Bullet>() != null)
         {
@@ -32,6 +43,15 @@ public class Hazard : MonoBehaviour
             }
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag=="Shelter")
+        {
+            collision.gameObject.GetComponent<Shelter>().maxResistance--;
+            OnHazardDestroyed();
+        }
+    }
+
 
     protected void OnHazardDestroyed()
     {

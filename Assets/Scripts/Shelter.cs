@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Shelter : MonoBehaviour
 {
     [SerializeField]
-    private int maxResistance = 5;
+    public int maxResistance = 5;
 
+    public Text vida;
     public int MaxResistance
     {
         get
@@ -14,6 +16,16 @@ public class Shelter : MonoBehaviour
         protected set
         {
             maxResistance = value;
+        }
+    }
+
+    private void Update()
+    {
+        vida.text = maxResistance.ToString();
+
+        if (maxResistance <= 0)
+        {
+            GameObject.Find("Canvas").GetComponent<GameOver>().gameOver();
         }
     }
 

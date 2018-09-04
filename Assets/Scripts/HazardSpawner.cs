@@ -15,7 +15,7 @@ public static class SpawnerExtensions
 public class HazardSpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject hazardTemplate;
+    private GameObject[] hazardTemplate;
 
     private Collider2D myCollider;
 
@@ -38,7 +38,9 @@ public class HazardSpawner : MonoBehaviour
         }
         else
         {
-            Instantiate(hazardTemplate, myCollider.GetPointInVolume(), transform.rotation);
+            int rand = Random.Range(0, hazardTemplate.Length);
+            GameObject hazard = Instantiate(hazardTemplate[rand], myCollider.GetPointInVolume(), transform.rotation);
+            hazard.GetComponent<Hazard>().hazardType = rand;
         }
     }
 }

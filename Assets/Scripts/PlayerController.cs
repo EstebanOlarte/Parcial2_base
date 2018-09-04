@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
     private Collider2D myCollider;
 
     [SerializeField]
-    private Object bulletGO;
+    private GameObject bulletGO;
+    [SerializeField]
+    private GameObject apBulletGo;
 
     protected bool InsideCamera(bool positive)
     {
@@ -41,10 +43,18 @@ public class PlayerController : MonoBehaviour
             transform.position += new Vector3(movementFactor * speed * Time.deltaTime, 0F, 0F);
         }
 
-        if (bulletGO != null && Input.GetAxis("Jump") != 0 && canFire)
+        if (bulletGO != null && Input.GetAxis("Fire1") != 0 && canFire)
         {
-            Instantiate(bulletGO, transform.position + (transform.up * 0.5F), Quaternion.identity);
-            print("Fiyah!");
+            GameObject bullet = Instantiate(bulletGO, transform.position + (transform.up * 0.5F), Quaternion.identity);
+            bullet.GetComponent<Bullet>().bulletType = 1;
+            //print("Fiyah!");
+            StartCoroutine("FireCR");
+        }
+        if (apBulletGo != null && Input.GetAxis("Fire2") != 0 && canFire)
+        {
+            GameObject bullet = Instantiate(apBulletGo, transform.position + (transform.up * 0.5F), Quaternion.identity);
+            bullet.GetComponent<Bullet>().bulletType = 2;
+            //print("Fiyah!");
             StartCoroutine("FireCR");
         }
     }
@@ -59,8 +69,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Hazard>() != null)
         {
-            Time.timeScale = 0F;
-            print("Game Over");
+            GameObject.Find("Canvas").GetComponent<GameOver>().gameOver();
         }
     }
 
