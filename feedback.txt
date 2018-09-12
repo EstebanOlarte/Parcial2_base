@@ -1,0 +1,16 @@
+Feedback
+
+Examen (3.0/5.0)
+ * Hay GameOver en los casos pedidos.
+ * Uno de los shelters muestra la resistencia de otro diferente, pero es funcional.
+ * APBullet no dispara más lento que Bullet.
+ * La implementación de disparo satisface el enunciado.
+ * No hay implementación para Invader.
+ * La implementación de Debris no se hizo usando OOP, solo se extendió Hazard, pero es funcional.
+ * No hay implementación para tiempo de regeneración del shelter.
+
+Bonificación (0.1/0.5)
+ * No hay ´propuesta para la bonificación
+ * +0.1 por agregar labels a la resistencia de los shelters.
+
+Total: 3.0 + 0.1
